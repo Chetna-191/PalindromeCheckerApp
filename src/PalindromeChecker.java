@@ -1,31 +1,26 @@
-import java.util.Scanner;
+import java.util.Stack;
 
-public class PalindromeChecker{
+public class PalindromeChecker {
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a string: ");
-        String input = scanner.nextLine();
 
-        char[] chars = input.toCharArray();
-        int start = 0;
-        int end = chars.length - 1;
+        String input = "noon";
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
         boolean isPalindrome = true;
-
-        while (start < end) {
-            if (chars[start] != chars[end]) {
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
-
         if (isPalindrome) {
-            System.out.println("Is it a Palindrome: True");
+            System.out.println("Input:"+input + "\nIs it a palindrome? : Yes");
         } else {
-            System.out.println("Is it a Palindrome: False");
+            System.out.println("Input:"+input + "\nIs it a palindrome? : No");
         }
-
-        scanner.close();
     }
 }
