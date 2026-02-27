@@ -1,5 +1,5 @@
 public class PalindromeChecker {
-    static void main(String[] args) {
+    public static void main(String[] args) {
         String input = "madam";
         boolean isPalindrome = true;
 
