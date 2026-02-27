@@ -1,15 +1,22 @@
 public class PalindromeChecker {
+    static void main(String[] args) {
+        String input = "madam";
+        boolean isPalindrome = true;
 
-    public static class UseCase1PalindromeApp {
-        public UseCase1PalindromeApp() {
-            System.out.println("Welcome to Palindrome Checker Management System");
-            System.out.println("Version 1.0");
-            System.out.println("System initialised successfully");
+        for(int i=0; i< input.length()/2; i++) {
+            if(input.charAt(i) != input.charAt(input.length() -1 - i)) {
+                isPalindrome = false;
+                break;
+            }
         }
-    }
-    public static void main(String[] args) {
-        UseCase1PalindromeApp entry = new UseCase1PalindromeApp();
-    }
+        if(isPalindrome) {
+            System.out.println(input + ": is it a palindrome? : true");
+        } else {
+            System.out.println(input + ": is it a palindrome? : false");
+        }
 
-}//uc1
+    }
+}
+
+
 
