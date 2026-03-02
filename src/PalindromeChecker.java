@@ -1,39 +1,75 @@
-import java.util.Scanner;
+import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-public class PalindromeChecker {
+public class UseCase13PalindromePerformanceApp {
+
+    // Stack-based palindrome check
+    public static boolean isPalindromeStack(String input) {
+        String processed = input.replaceAll("\\s+", "").toLowerCase();
+        Stack<Character> stack = new Stack<>();
+        for (char c : processed.toCharArray()) {
+            stack.push(c);
+        }
+        for (char c : processed.toCharArray()) {
+            if (c != stack.pop()) return false;
+        }
+        return true;
+    }
+
+    // Deque-based palindrome check
+    public static boolean isPalindromeDeque(String input) {
+        String processed = input.replaceAll("\\s+", "").toLowerCase();
+        Deque<Character> deque = new ArrayDeque<>();
+        for (char c : processed.toCharArray()) {
+            deque.addLast(c);
+        }
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) return false;
+        }
+        return true;
+    }
+
+    // Two-pointer array approach
+    public static boolean isPalindromeArray(String input) {
+        String processed = input.replaceAll("\\s+", "").toLowerCase();
+        char[] arr = processed.toCharArray();
+        int left = 0, right = arr.length - 1;
+        while (left < right) {
+            if (arr[left] != arr[right]) return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        String testInput = "Able was I ere I saw Elba";  // example palindrome
 
-        System.out.println("=== Palindrome Checker App (UC12 - Strategy Pattern) ===");
-        System.out.print("Enter a string: ");
-        String input = scanner.nextLine();
+        // Stack Strategy
+        long start = System.nanoTime();
+        boolean stackResult = isPalindromeStack(testInput);
+        long end = System.nanoTime();
+        long stackTime = end - start;
 
-        System.out.println("Choose Algorithm:");
-        System.out.println("1. Stack Strategy");
-        System.out.println("2. Deque Strategy");
-        System.out.print("Enter choice (1 or 2): ");
-        int choice = scanner.nextInt();
+        // Deque Strategy
+        start = System.nanoTime();
+        boolean dequeResult = isPalindromeDeque(testInput);
+        end = System.nanoTime();
+        long dequeTime = end - start;
 
-        PalindromeStrategy strategy;
+        // Array Strategy
+        start = System.nanoTime();
+        boolean arrayResult = isPalindromeArray(testInput);
+        end = System.nanoTime();
+        long arrayTime = end - start;
 
-        if (choice == 1) {
-            strategy = new StackStrategy();
-        } else {
-            strategy = new DequeStrategy();
-        }
+        System.out.println("=== Palindrome Performance Comparison ===");
+        System.out.println("Input: " + testInput + "\n");
 
-        PalindromeContext context = new PalindromeContext(strategy);
-
-        boolean result = context.execute(input);
-
-        if (result) {
-            System.out.println("Result: The given string is a Palindrome.");
-        } else {
-            System.out.println("Result: The given string is NOT a Palindrome.");
-        }
-
-        scanner.close();
+        System.out.println("Stack Strategy: " + stackResult + " | Time: " + stackTime + " ns");
+        System.out.println("Deque Strategy: " + dequeResult + " | Time: " + dequeTime + " ns");
+        System.out.println("Array Strategy: " + arrayResult + " | Time: " + arrayTime + " ns");
     }
 }
