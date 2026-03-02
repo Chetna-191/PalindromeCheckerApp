@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/PalindromeCheckerApp.iml" filepath="$PROJECT_DIR$/PalindromeCheckerApp.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/StepB1P26_Ra2411003010572.iml" filepath="$PROJECT_DIR$/StepB1P26_Ra2411003010572.iml" />
+>>>>>>> feature/UC11
     </modules>
   </component>
 </project>
